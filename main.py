@@ -11,6 +11,7 @@ def print_hi(name):
     print(2*6)
     print(2**5)
     print(*[1,2,3])
+    print('esrtger')
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
