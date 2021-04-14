@@ -2,8 +2,6 @@
 from flask import Flask, request
 import logging
 
-
-
 # создаём приложение
 # мы передаём __name__, в нем содержится информация,
 # в каком модуле мы находимся.
