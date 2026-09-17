@@ -1,12 +1,11 @@
-from logging import INFO
 
 
 f = open('demo_23.txt').read().split('\n')
 n = len(f)
 m = len(f)
 q = {}
+dist = {}
 for _ in range(m):
-    print(f[_])
     u, v, wt = f[_].split()
     u = int(u)
     v = int(v)
@@ -15,33 +14,36 @@ for _ in range(m):
         q[u] = [[v, wt]]
     else:
         q[u].append([v, wt])
+    dist[u] = float('inf')
+    dist[v] = float('inf')
+
     # if v not in q:
     #     q[v] = [[u, wt]]
     # else:
     #     q[v].append([u, wt])
     # ели граф не направленный
-
+dist[1] = 0
 start = 1
-used = [False for _ in range(0, m + 1)]
-dist = [[i, float('inf')] for i in range(0, 1001)]
-dist[start][1] = 0
-print(dist)
+used = dict((_, False) for _ in dist)
 mindist = 0
 next = start
+print(q)
 while mindist < float('inf'):
+    if next in q:
+        for i in q[next]:
+            to = i[0]
+            wt = i[1]
 
-    for i in q[next]:
-        to = i[0]
-        wt = i[1]
-        dist[to][1] = min(dist[to][1], dist[next][1] + wt)
+            dist[to] = min(dist[to], dist[next] + wt)
     used[next] = True
     mindist = float('inf')
-    for i in range(0, n):
-        print(dist, i, mindist, i)
-        if used[i] == False and dist[i][1] < mindist:
-            mindist = dist[i][1]
+    for i in dist:
+        if used[i] == False and dist[i] < mindist:
+            mindist = dist[i]
             next = i
-    # print(mindist)
+    if mindist == float('inf'):
+        break
+# print(mindist)
 
 print(dist[100])
 
